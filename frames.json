@@ -1,14 +1,14 @@
 {
   "frames": [
     {
-      "filename": "A-A-D-E.svg",
-      "name": "ALUMNI",
-      "path": "frames/A-A-D-E.svg"
-    },
-    {
       "filename": "Alumni.png",
       "name": "Alumni-Frame",
       "path": "frames/Alumni.png"
+    },
+    {
+      "filename": "A-A-D-E.svg",
+      "name": "ALUMNI",
+      "path": "frames/A-A-D-E.svg"
     }
   ]
 }
