@@ -221,7 +221,7 @@ Govt Edward College, Pabna </span></p>
                 rotateLbl: "Rotation Angle",
                 downloadBtn: "Download Framed Photo",
                 previewLbl: "Live Preview Area",
-                tipText: "You can drag the photo inside canvas to reposition it.",
+                tipText: "You can drag the photo inside canvas to reposition them.",
                 facultyTitle: "Our Honourable Support Team"
             },
             bn: {
@@ -752,13 +752,17 @@ Govt Edward College, Pabna </span></p>
             bgMusic.volume = 0.6;
             devMusic.volume = 0.6;
 
-            const playlist = ['audio/bg-music.mp3']; // চাইলে আরও গান দিতে পারেন
+            const playlist = ['audio/bg-music.mp3'];
             let currentTrack = 0;
 
             function playBgTrack(index) {
                 if (playlist.length === 0) return;
                 bgMusic.src = playlist[index];
-                bgMusic.play().catch(e => console.log("Autoplay waiting for user interaction:", e));
+                bgMusic.play().then(() => {
+                    bgMusic.dataset.wasPlaying = "true";
+                }).catch(e => {
+                    console.log("Autoplay waiting for user interaction:", e);
+                });
             }
 
             bgMusic.addEventListener('ended', () => {
@@ -766,22 +770,23 @@ Govt Edward College, Pabna </span></p>
                 playBgTrack(currentTrack);
             });
 
-            // Developer music source set (আলাদা নামের ফাইলটি এখানে পাথ দিন, যেমন: 'audio/dev-music.mp3')
+            // Developer music source set
             devMusic.src = 'audio/dev-music.mp3';
 
             const startAudio = () => {
                 if (bgMusic.paused && devMusic.paused) {
                     playBgTrack(currentTrack);
-                    bgMusic.dataset.wasPlaying = "true";
                 }
                 window.removeEventListener('click', startAudio);
                 window.removeEventListener('keydown', startAudio);
                 window.removeEventListener('touchstart', startAudio);
+                window.removeEventListener('pointerdown', startAudio);
             };
 
             window.addEventListener('click', startAudio);
             window.addEventListener('keydown', startAudio);
             window.addEventListener('touchstart', startAudio);
+            window.addEventListener('pointerdown', startAudio);
         });
     </script>
 </body>
